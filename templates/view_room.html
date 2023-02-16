@@ -5,13 +5,19 @@
     <title>La mia Chat App</title>
 </head>
 <body>
-    <h1>Benvenuti nella stanza: {{ room.name }}</h1>
+    <h1>Benvenuti nella stanza: {{ room.room_name }}</h1>
 
     <div id="messages"></div>
 
-    <form id="message_input_form">
-        <input type="text" id="message_input" placeholder="Inserisci il tuo messaggio qui">
-        <button type="submit">Invia</button>
+    <ul>
+        {% for message in room_messages %}
+            <li>{{ message.username }} ----> {{ message.message }}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post">
+        {{ message_form.message() }}
+        {{ message_form.submit() }}
     </form>
 
     <ul>
@@ -22,51 +28,4 @@
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js" integrity="sha512-rwu37NnL8piEGiFhe2c5j4GahN+gFsIn9k/0hkRY44iz0pc81tBNaUN56qF8X4fy+5pgAAgYi2C9FXdetne5sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    const socket = io.connect("http://localhost:80");
-
-    socket.on('connect', function() {
-        socket.emit('join_room', {
-            username: "{{ username }}",
-            room: "{{ room._id }}"
-        })
-
-        let message_input = document.getElementById('message_input')
-
-        document.getElementById('message_input_form').onsubmit = function (e) {
-            e.preventDefault();
-            let message = message_input.value.trim();
-            if (message_input.value.length) {
-                socket.emit('send_message', {
-                    username: "{{ username }}",
-                    room: "{{ room._id }}",
-                    message: message
-                })
-            }
-            message_input.value = '';
-            message_input.focus();
-        }
-    })
-
-    window.onbeforeunload = function() {
-        socket.emit('leave_room', {
-            username: "{{ username }}",
-            room: "{{ room._id }}"
-        })
-    }
-
-    socket.on('receive_message', function(data) {
-        console.log(data);
-        const newNode = document.createElement('div')
-        newNode.innerHTML = `<b>${data.username}:&nbsp;</b> ${data.message}`;
-        document.getElementById('messages').appendChild(newNode);
-    })
-
-    socket.on('join_room_announcement',  function (data) {
-        console.log(data);
-        const newNode = document.createElement('div')
-        newNode.innerHTML = `<b>${data.username}</b> è entrato nella stanza`;
-        document.getElementById('messages').appendChild(newNode);
-    })
-</script>
 </html>

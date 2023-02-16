@@ -12,6 +12,7 @@ chat_db = client.get_database("ChatDB")
 users_collection = chat_db.get_collection("users")
 rooms_collection = chat_db.get_collection("rooms")
 room_members_collection = chat_db.get_collection("room_members")
+message_collection = chat_db.get_collection("message")
 
 
 def save_user(username, email, password):
@@ -42,7 +43,7 @@ def update_room(room_id, room_name):
 
 
 def get_room(room_id):
-   return rooms_collection.find_one({'_id': ObjectId(room_id)})
+    return rooms_collection.find_one({'_id': ObjectId(room_id)})
 
 
 def add_room_member(room_id, room_name, username, added_by, is_room_admin=False):
@@ -83,3 +84,11 @@ def is_room_member(room_id, username):
 def is_room_admin(room_id, username):
     return room_members_collection.count_documents(
         {'_id': {'room_id': ObjectId(room_id), username: username}, 'is_room_admin': True})
+
+
+def save_message(room_id, username, message):
+    message_collection.insert_one({'room_id': ObjectId(room_id), 'username': username, 'message': message})
+
+
+def get_message_by_room_id(room_id):
+    return list(message_collection.find({'room_id': ObjectId(room_id)}))

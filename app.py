@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_socketio import SocketIO, join_room
 from pymongo.errors import DuplicateKeyError
+from forms import MessageForm
 
 from user import User
 from db import get_user, save_user, save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, \
-    get_room_members
+    get_room_members, save_message, get_message_by_room_id
 
 app = Flask(__name__)
 app.secret_key = 'My secret key'
@@ -90,30 +91,27 @@ def create_room():
     return render_template('create_room.html', message=message)
 
 
-@app.route('/rooms/<room_id>/')
+@app.route('/rooms/<room_id>/', methods=['GET', 'POST'])
 @login_required
 def view_room(room_id):
+    message_form = MessageForm()
+    room_messages = get_message_by_room_id(room_id)
+    room_members = get_room_members(room_id)
+    if request.method == 'POST':
+        save_message(room_id, current_user.username, message_form.message.data)
+        print("inserito messaggio con ", message_form.message.data)
+        return redirect(url_for('view_room', room_id=room_id))
+
     room = get_room(room_id)
     if room and is_room_member(room_id, current_user.username):
-        room_members = get_room_members(room_id)
-        return render_template('view_room.html', username=current_user.username, room=room, room_members=room_members)
+        return render_template('view_room.html',
+                               username=current_user.username,
+                               room=room,
+                               room_members=room_members,
+                               message_form=message_form,
+                               room_messages=room_messages)
     else:
         return "Stanza non trovata", 404
-
-
-@socketio.on('send_message')
-def handle_send_message_event(data):
-    app.logger.info("{} ha inviato un messaggio nella stanza {}: {}".format(data['username'],
-                                                                            data['room'],
-                                                                            data['message']))
-    socketio.emit('receive_message', data, room=data['room'])
-
-
-@socketio.on('join_room')
-def handle_join_room_event(data):
-    app.logger.info("{} è entrato nella stanza {}".format(data['username'], data['room']))
-    join_room(data['room'])
-    socketio.emit('join_room_announcement', data)
 
 
 @login_manager.user_loader
