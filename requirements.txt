@@ -1,6 +1,8 @@
 Flask~=2.2.2
 flask-socketio
-evenlet
 pymongo~=4.3.3
 Werkzeug~=2.2.2
 WTForms~=3.0.1
+flask-login
+flask_wtf
+certifi~=2022.12.7

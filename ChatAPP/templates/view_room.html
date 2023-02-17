@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/view_room.css') }}">
+    <title>La mia Chat App</title>
+</head>
+<body>
+<div class="container">
+    <div class="welcome_section">
+        <h1 id="room_name"><span class="nome_stanza">{{ room.name }}</span></h1>
+        <div id="messages"></div>
+    </div>
+    <div class="numer_of_messages">
+            numero messaggi : {{ room_messages_length }}
+        </div>
+    <div class="messages_section">
+        <div class="members_section">
+            <div id="membri_nella_stanza_section">
+                <h4 id="membri_nella_stanza">Membri nella stanza</h4>
+                {% for member in room_members %}
+                    <li>{{ member._id.username }}</li>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="message_container" id="to_scroll">
+            {% for message in room_messages %}
+            <div class="{% if current_user.username == message.username %}{{ 'message_box' }}{% else %}{{ 'message_box_when_user' }}{% endif %}">
+                <div class="message_name">
+                    {{ message.username }}
+                </div>
+                <div class="message_content">
+                    {{ message.message }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="send_message_section">
+        <form method="post" id="form_invio_messaggio">
+            {{ message_form.message(id='message_input') }}
+            {{ message_form.submit(id='message_send_button') }}
+        </form>
+    </div>
+</div>
+
+<script>
+
+</script>
+
+</body>
+<script src="{{ url_for('static', filename='/js/view_room.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js"
+        integrity="sha512-rwu37NnL8piEGiFhe2c5j4GahN+gFsIn9k/0hkRY44iz0pc81tBNaUN56qF8X4fy+5pgAAgYi2C9FXdetne5sQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</html>

@@ -3,10 +3,14 @@ from datetime import datetime
 from bson import ObjectId
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash
+import certifi
 
-from user import User
+from ChatAPP.user import User
 
-client = MongoClient("mongodb+srv://test:1234@chatapp.o7rhppm.mongodb.net/?retryWrites=true&w=majority")
+ca = certifi.where()
+
+client = MongoClient("mongodb+srv://test:1234@chatapp.o7rhppm.mongodb.net/?retryWrites=true&w=majority",
+                     tlsCAFile=ca)
 
 chat_db = client.get_database("ChatDB")
 users_collection = chat_db.get_collection("users")
@@ -83,7 +87,7 @@ def is_room_member(room_id, username):
 
 def is_room_admin(room_id, username):
     return room_members_collection.count_documents(
-        {'_id': {'room_id': ObjectId(room_id), username: username}, 'is_room_admin': True})
+        {'_id': {'room_id': ObjectId(room_id), 'username': username}, 'is_room_admin': True})
 
 
 def save_message(room_id, username, message):
