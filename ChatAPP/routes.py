@@ -8,13 +8,20 @@ from ChatAPP.db import get_rooms_for_user, save_user, get_user, save_room, add_r
 from ChatAPP.forms import MessageForm
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
     rooms = []
     if current_user.is_authenticated():
         rooms = get_rooms_for_user(current_user.username)
+
+    if request.method == 'POST':
+        if request.form.get('logout') == 'logout':
+            # pass # do something else
+            print("logout")
+            return redirect(url_for('logout'))
+
     return render_template('index.html', rooms=rooms)
 
 
@@ -34,6 +41,12 @@ def login():
             return redirect(url_for('home'))
         else:
             message = "Autenticazione fallita"
+
+        if request.form.get('registrati') == 'registrati':
+            # pass # do something else
+            print("registrati")
+            return redirect(url_for('signup'))
+
     return render_template('login.html', message=message)
 
 
@@ -127,9 +140,16 @@ def view_room(room_id):
     room_messages_length = len(room_messages)
     room_members = get_room_members(room_id)
     if request.method == 'POST':
-        save_message(room_id, current_user.username, message_form.message.data)
-        print("inserito messaggio con ", message_form.message.data)
-        return redirect(url_for('view_room', room_id=room_id))
+        if request.form.get('message_input'):
+            save_message(room_id, current_user.username, message_form.message.data)
+            print("inserito messaggio con ", message_form.message.data)
+            return redirect(url_for('view_room', room_id=room_id))
+        elif request.form.get('modifica_stanza') == 'Modifica stanza':
+            print("eccomi")
+            print(request.path)
+            return redirect(request.path + "/edit")
+            # ritornare la rotta attuale più /edit
+            # return redirect()
 
     if room and is_room_member(room_id, current_user.username):
         return render_template('view_room.html',

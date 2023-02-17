@@ -4,5 +4,5 @@ const scrollToBottom = (id) => {
 }
 
 let to_scroll = document.getElementById('to_scroll')
-to_scroll.scrollTop = to_scroll.scrollHeight
+to_scroll.scrollTop = to_scroll.scrollHeight * 2
 
