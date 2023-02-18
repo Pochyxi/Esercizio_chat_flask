@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Modifica stanza</title>
-</head>
-<body>
-    <h1>Modifica stanza</h1>
-    <h3>{{ message }}</h3>
+{% extends 'base.html' %}
+
+{% block title %}
+Modifica stanza
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Modifica stanza</h1>
+<h3 class="alert alert-danger w-50 m-auto my-5">{{ message }}</h3>
+<div class="card text-success p-4 w-50 m-auto">
     <form method="post">
-        <label>Nome stanza:</label>
-        <input type="text" name="room_name" value="{{ room.name }}">
-        <br>
-        <label>Membri:</label>
-        <input type="text" name="members" value="{{ room_members_str }}">
-        <br>
-        <button type="submit">Invia</button>
+        <div class="mb-3">
+            <label class="form-label" for="nome_stanza">Nome stanza:</label>
+            <input class="form-control" type="text" name="room_name" id="nome_stanza" value="{{ room.name }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="membri_stanza">Membri:</label>
+            <input class="form-control" type="text" id="membri_stanza" name="members" value="{{ room_members_str }}">
+            <div id="emailHelp" class="form-text">Eliminare un nome per rimuovere un membro dalla stanza, aggiungi il nome utente di un membro per aggiungerlo alla lista, si prega di non lasciare spazzi tra le virgole</div>
+        </div>
+
+        <button class="btn btn-success" type="submit">Invia</button>
     </form>
-</body>
-</html>
+
+    {% endblock %}
+</div>

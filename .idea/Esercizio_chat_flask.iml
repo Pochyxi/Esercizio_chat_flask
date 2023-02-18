@@ -7,6 +7,7 @@
     <orderEntry type="jdk" jdkName="Python 3.11 (Esercizio_chat_flask)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="socket.io" level="application" />
+    <orderEntry type="library" name="bootstrap-icons" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">

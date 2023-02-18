@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrazione</title>
-</head>
-<body>
-  <h1>Registrazione</h1>
-  <h3>{{ message }}</h3>
-  <form action="/signup" method="post">
-    <label>Nome utente:</label>
-    <input type="text" name="username">
-    <br>
-    <label>Indirizzo email</label>
-    <input type="text" name="email">
-    <br>
-    <label>Password:</label>
-    <input type="password" name="password">
-    <br>
-    <button type="submit">Conferma</button>
-  </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+Registrazione
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Registrazione</h1>
+<h3 class="alert alert-danger w-50 m-auto my-5">{{ message }}</h3>
+<div class="card text-success p-4 w-50 m-auto">
+    <form action="/signup" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="signup_username">Nome utente:</label>
+            <input class="form-control" type="text" name="username" id="signup_username">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="signup_email">Indirizzo email</label>
+            <input class="form-control" type="text" name="email" id="signup_email">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="signup_password">Password:</label>
+            <input class="form-control" type="password" name="password" id="signup_password">
+        </div>
+
+        <button class="btn btn-success" type="submit">Conferma</button>
+    </form>
+</div>
+
+
+{% endblock %}

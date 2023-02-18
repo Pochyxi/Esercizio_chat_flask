@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pagina di Login</title>
-</head>
-<body>
-  <h1>Pagina di Login</h1>
-  <h3>{{ message }}</h3>
-  <form action="/login" method="post">
-    <label>Nome utente:</label>
-    <input type="text" name="username">
-    <br>
-    <label>Password:</label>
-    <input type="password" name="password">
-    <br>
-    <button type="submit">Accedi</button>
-    <input type="submit" value="registrati" name="registrati"/>
-  </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+Pagina di Login
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Pagina di Login</h1>
+<h3 class="alert alert-danger w-50 m-auto my-5">{{ message }}</h3>
+<div class="card text-success p-4 w-50 m-auto">
+    <form action="/login" method="post">
+        <div class="mb-3">
+            <label for="login_username" class="form-label">Nome utente:</label>
+            <input type="text" name="username" id="login_username" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="login_password" class="form-label">Password:</label>
+            <input type="password" name="password" id="login_password" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Accedi</button>
+        <input class="btn btn-success" type="submit" value="registrati" name="registrati"/>
+    </form>
+</div>
+
+
+{% endblock %}

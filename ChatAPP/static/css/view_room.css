@@ -1,48 +1,61 @@
 body{
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    background-color: black;
+    background-color: #313131;
     font-size: 1.5rem;
+    height: 100vh;
+    overflow: hidden;
 }
-.container{
-    background-color: black;
+.my_container{
+    background-color: #313131;
+    min-height: 100vh;
     color: antiquewhite;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: space-between;
-
+    justify-content: start;
     overflow: hidden;
 }
     .welcome_section{
         display: flex;
         justify-content: center;
         text-align: center;
+        background-color: #505050;
     }
         #room_name{
+            margin-top: 0;
+        }
+    .members_section{
+        display: flex;
+    }
+        #membri_nella_stanza_section{
+            background-color: #777777;
+            color: #ffffff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #membri_nella_stanza{
             margin-top: 0;
         }
     .messages_section{
         display: flex;
         justify-content: space-between;
     }
-        .numer_of_messages{
-            text-align: end;
+        .number_of_messages{
+            text-align: center;
         }
         .message_container{
             width: 70%;
-            height: 80vh;
+            height: 65vh;
             text-align: center;
             overflow: auto;
         }
             .message_box{
-                height: 5vh;
+                padding: 0 20px 20px 10px;
                 border: 2px solid black;
-                padding: 5px;
                 box-shadow: 0 4px 8px 0 rgba(227, 221, 221, 0.2);
                 transition: 0.3s;
-                background-color: azure;
+                background-color: #dcf6e1;
                 color: black;
                 border-radius: 5px;
                 width: 50%;
@@ -51,8 +64,8 @@ body{
 
             }
             .message_box_when_user{
+                padding: 0 20px 20px 10px;
                 border: 2px solid black;
-                padding: 5px;
                 box-shadow: 0 4px 8px 0 rgba(227, 221, 221, 0.2);
                 transition: 0.3s;
                 background-color: azure;
@@ -70,34 +83,19 @@ body{
                     text-align: end;
                 }
     .send_message_section{
-        display: flex;
-        justify-content: end;
-        margin-top: 20px;
+        margin-top: 40px;
     }
-    #form_invio_messaggio{
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-        #message_input {
-            height: 50px;
-            width: 50vw;
-            margin-right: 50px;
-            font-size: 2rem;
-        }
-        #message_send_button{
-            margin-right: 20px;
-            display: none;
-        }
-    .members_section{
-        display: flex;
-    }
-        #membri_nella_stanza_section{
-            background-color: aliceblue;
-            color: black;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        #membri_nella_stanza{
-            margin-top: 0;
+            #message_input {
+                height: 100px;
+                width: 100%;
+                margin-right: 50px;
+                font-size: 2rem;
+            }
+            #message_send_button{
+                margin-right: 20px;
+                display: none;
+            }
+        .icon_label{
+            cursor: pointer;
+            font-size: 4rem;
         }

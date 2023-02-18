@@ -1,20 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Creazione Stanza</title>
-</head>
-<body>
-  <h1>Creazione stanza</h1>
-  <h3>{{ message }}</h3>
-  <form method="post">
-    <label>Nome stanza:</label>
-    <input type="text" name="room_name">
-    <br>
-    <label>Membri:</label>
-    <input type="text" name="members">
-    <br>
-    <button type="submit">Invia</button>
-  </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+Creazione Stanza
+{% endblock %}
+{% block content %}
+
+<h1 class="text-center">Creazione stanza</h1>
+<h3 class="alert alert-danger w-50 m-auto my-5">{{ message }}</h3>
+
+<div class="card text-success p-4 w-50 m-auto">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label" for="nome_stanza">Nome stanza:</label>
+            <input class="form-control" type="text" name="room_name" id="nome_stanza">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="membri">Membri:</label>
+            <input class="form-control" type="text" name="members" id="membri">
+        </div>
+        <button class="btn btn-primary" type="submit">Invia</button>
+    </form>
+</div>
+
+{% endblock %}

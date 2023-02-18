@@ -1,22 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>La mia Chat App</title>
-</head>
-<body>
-<h1>La mia Chat</h1>
-<h3>Ciao {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Guest{% endif %} !</h3>
+{% extends 'base.html' %}
 
-<form method="post" action="/">
-    <input type="submit" value="logout" name="logout"/>
-</form>
+{% block title %}
+La mia Chat App
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h3>Ciao {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Guest{% endif %} !</h3>
+        </div>
+    </div>
+    <div class="row mt-3 text-center">
+        <div class="col">
+            <h1>Le mie stanze</h1>
+        </div>
+    </div>
+    <div class="row mt-5">
 
 
-<ul>
-    {% for room in rooms %}
-    <li><a href="/rooms/{{ room._id.room_id }}">{{ room.room_name }}</a></li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+            {% for room in rooms %}
+            <div class="col d-flex justify-content-center my-3">
+                <div class="card bg-dark" style="width: 18rem;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title ">{{ room.room_name }}</h5>
+                        <a class="btn btn-success mt-5" href="/rooms/{{ room._id.room_id }}">Entra</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+    </div>
+    <div class="row text-center mt-3">
+        <div class="col">
+            <label for="add_room">
+                <i class="bi bi-plus-circle-fill icon_label"></i>
+            </label>
+            <form method="post">
+                <input class="d-none" type="submit" id="add_room" value="add_room" name="add_room">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
