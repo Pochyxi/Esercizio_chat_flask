@@ -5,9 +5,10 @@ Creazione Stanza
 {% block content %}
 
 <h1 class="text-center">Creazione stanza</h1>
-<h3 class="alert alert-danger w-50 m-auto my-5">{{ message }}</h3>
+<h3 class="{% if message %}{{ 'alert alert-danger w-50 mx-auto my-5' }}{% else %}{{ 'alert alert-danger w-50 m-auto my-5 d-none' }}{% endif %}">
+    {{ message }}</h3>
 
-<div class="card text-success p-4 w-50 m-auto">
+<div class="card text-success p-4 w-75 mx-auto my-5">
     <form method="post">
         <div class="mb-3">
             <label class="form-label" for="nome_stanza">Nome stanza:</label>
@@ -15,7 +16,11 @@ Creazione Stanza
         </div>
         <div class="mb-3">
             <label class="form-label" for="membri">Membri:</label>
-            <input class="form-control" type="text" name="members" id="membri">
+            <input class="form-control" value="{{current_user.username}}," type="text" name="members" id="membri">
+            <div id="emailHelp" class="form-text">
+                Aggiungi nomi degli utenti separati dalla virgola.
+            </div>
+
         </div>
         <button class="btn btn-primary" type="submit">Invia</button>
     </form>

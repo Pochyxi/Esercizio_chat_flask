@@ -1,38 +1,25 @@
+# ### MODULI ### #
 from flask_login import current_user, login_user, login_required, logout_user
 from flask import redirect, url_for, render_template, request
 from pymongo.errors import DuplicateKeyError
 
+# ###  IMPORTS PACKAGE ### #
 from ChatAPP import app, login_manager
 from ChatAPP.db import get_rooms_for_user, save_user, get_user, save_room, add_room_members, get_room, is_room_admin, \
     get_message_by_room_id, get_room_members, save_message, is_room_member, update_room, remove_room_members
 from ChatAPP.forms import MessageForm, CupidoForm
 
 
+# ### CONTROLLO SE L'UTENTE E' AUTENTICATO ### #
+################################################
 def check_auth():
     if current_user.is_authenticated:
         return True
     return False
 
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    rooms = []
-    if current_user.is_authenticated():
-        rooms = get_rooms_for_user(current_user.username)
-
-    if request.method == 'POST':
-        if request.form.get('logout') == 'logout':
-            # pass # do something else
-            print("logout")
-            return redirect(url_for('logout'))
-        elif request.form.get('add_room') == 'add_room':
-            return redirect(url_for('create_room'))
-
-    return render_template('index.html', rooms=rooms, check_auth=check_auth())
-
-
+# ### PAGINA PER IL LOGIN ### #
+###############################
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -61,6 +48,8 @@ def login():
     return render_template('login.html', message=message)
 
 
+# ### PAGINA DI REGISTRAZIONE  ### #
+####################################
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if current_user.is_authenticated:
@@ -82,6 +71,8 @@ def signup():
     return render_template('signup.html', message=message)
 
 
+# ### ROTTA PER IL LOGOUT  ### #
+################################
 @app.route("/logout")
 @login_required
 def logout():
@@ -89,6 +80,29 @@ def logout():
     return redirect(url_for('home'))
 
 
+# ### PAGINA PRINCIPALE ### #
+#############################
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    rooms = []
+    if current_user.is_authenticated():
+        rooms = get_rooms_for_user(current_user.username)
+
+    if request.method == 'POST':
+        if request.form.get('logout') == 'logout':
+            # pass # do something else
+            print("logout")
+            return redirect(url_for('logout'))
+        elif request.form.get('add_room') == 'add_room':
+            return redirect(url_for('create_room'))
+
+    return render_template('index.html', rooms=rooms, check_auth=check_auth())
+
+
+# ### CREAZIONE DELLA STANZA ### #
+##################################
 @app.route('/create-room/', methods=['GET', 'POST'])
 @login_required
 def create_room():
@@ -104,6 +118,7 @@ def create_room():
                 if current_user.username in usernames:
                     usernames.remove(current_user.username)
                     add_room_members(room_id, room_name, usernames, current_user.username)
+
             return redirect(url_for('home'))
         else:
             message = "Errore nella creazione della stanza"
@@ -111,6 +126,8 @@ def create_room():
     return render_template('create_room.html', message=message, check_auth=check_auth())
 
 
+# ### MODIFICA DELLA STANZA  ### #
+##################################
 @app.route('/rooms/<room_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_room(room_id):
@@ -136,13 +153,17 @@ def edit_room(room_id):
 
                 if len(members_to_remove):
                     remove_room_members(room_id, members_to_remove)
+
                 message = 'Stanza modificata con successo'
                 room_members_str = ",".join(new_members)
                 room['name'] = get_room(room_id)
                 return redirect(url_for('view_room', room_id=room_id))
+
             elif request.form.get('go_home') == 'home':
                 return redirect(url_for('home'))
+
         room_members_str = ",".join(existing_room_members)
+
         return render_template('edit_room.html',
                                room=room,
                                room_members_str=room_members_str,
@@ -152,6 +173,8 @@ def edit_room(room_id):
         return "Stanza non trovata", 404
 
 
+# ### PAGINA DELLA CHAT ### #
+#############################
 @app.route('/rooms/<room_id>/', methods=['GET', 'POST'])
 @login_required
 def view_room(room_id):
