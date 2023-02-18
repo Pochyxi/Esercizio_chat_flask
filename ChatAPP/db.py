@@ -1,15 +1,18 @@
 from datetime import datetime
-
 from bson import ObjectId
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash
 import certifi
-
 from ChatAPP.user import User
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+print(os.getenv('DB_KEY'))
 
 ca = certifi.where()
 
-client = MongoClient("mongodb+srv://test:1234@chatapp.o7rhppm.mongodb.net/?retryWrites=true&w=majority",
+client = MongoClient(f"mongodb+srv://test:{os.getenv('DB_KEY')}@chatapp.o7rhppm.mongodb.net/?retryWrites=true&w=majority",
                      tlsCAFile=ca)
 
 chat_db = client.get_database("ChatDB")
