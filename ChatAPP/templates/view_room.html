@@ -25,13 +25,27 @@ Stanza
                 {{ message.username }}
             </div>
             <div class="message_content">
-                {{ message.message }}
+                <p>{{ message.message }}</p>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
+
 <div class="card d-flex flex-row flex-nowrap justify-content-center bg-dark send_message_section">
+    <div>{{love_message}}</div>
+    <div class="col ms-4">
+        {% if check_room_admin %}
+        <form method="post">
+            <!--suppress XmlInvalidId -->
+            <label class="icon_label" for="cupido">
+                <i class="bi bi-arrow-through-heart-fill"></i>
+            </label>
+
+            {{ cupido_form.submit(class='btn btn-outline-success d-none') }}
+        </form>
+        {% endif %}
+    </div>
     <div class="col ms-4">
         {% if check_room_admin %}
         <form method="post">

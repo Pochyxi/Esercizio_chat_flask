@@ -81,6 +81,7 @@ body{
                 }
                 .message_content{
                     text-align: end;
+                    word-wrap: break-word;
                 }
     .send_message_section{
         margin-top: 40px;

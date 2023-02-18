@@ -5,7 +5,7 @@ from pymongo.errors import DuplicateKeyError
 from ChatAPP import app, login_manager
 from ChatAPP.db import get_rooms_for_user, save_user, get_user, save_room, add_room_members, get_room, is_room_admin, \
     get_message_by_room_id, get_room_members, save_message, is_room_member, update_room, remove_room_members
-from ChatAPP.forms import MessageForm
+from ChatAPP.forms import MessageForm, CupidoForm
 
 
 def check_auth():
@@ -157,12 +157,15 @@ def edit_room(room_id):
 def view_room(room_id):
     room = get_room(room_id)
     message_form = MessageForm()
+    cupido_form = CupidoForm()
     room_messages = get_message_by_room_id(room_id)
     room_messages_length = len(room_messages)
     room_members = get_room_members(room_id)
     check_room_admin = is_room_admin(room_id, current_user.username)
+    love_message = ''
 
     if request.method == 'POST':
+
         if request.form.get('message_input'):
             save_message(room_id, current_user.username, message_form.message.data)
             print("inserito messaggio con ", message_form.message.data)
@@ -173,6 +176,8 @@ def view_room(room_id):
             # ritornare la rotta attuale più /edit
         elif request.form.get('go_home') == 'home':
             return redirect(url_for('home'))
+        elif request.form.get('cupido') == 'cupido':
+            love_message = 'ti voglio bene <3'
 
     if room and is_room_member(room_id, current_user.username):
         return render_template('view_room.html',
@@ -184,7 +189,9 @@ def view_room(room_id):
                                room_messages=room_messages,
                                room_messages_length=room_messages_length,
                                check_room_admin=check_room_admin,
-                               check_auth=check_auth())
+                               check_auth=check_auth(),
+                               cupido_form=cupido_form,
+                               love_message=love_message)
     else:
         return "Stanza non trovata", 404
 
