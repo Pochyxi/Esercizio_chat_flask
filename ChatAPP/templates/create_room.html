@@ -8,7 +8,7 @@ Creazione Stanza
 <h3 class="{% if message %}{{ 'alert alert-danger w-50 mx-auto my-5' }}{% else %}{{ 'alert alert-danger w-50 m-auto my-5 d-none' }}{% endif %}">
     {{ message }}</h3>
 
-<div class="card text-success p-4 w-75 mx-auto my-5">
+<div class="card bg-dark text-light p-4 w-75 mx-auto my-5">
     <form method="post">
         <div class="mb-3">
             <label class="form-label" for="nome_stanza">Nome stanza:</label>
@@ -16,9 +16,11 @@ Creazione Stanza
         </div>
         <div class="mb-3">
             <label class="form-label" for="membri">Membri:</label>
-            <input class="form-control" value="{{current_user.username}}," type="text" name="members" id="membri">
+            <input class="form-control" type="text" name="members" id="membri">
             <div id="emailHelp" class="form-text">
-                Aggiungi nomi degli utenti separati dalla virgola.
+                Lasciare vuoto per essere l'unico membro nella stanza. <br>
+                Per aggiungere membri alla stanza scrivere prima il vostro username(User,) poi aggiungere gli altri
+                membri (User,User2). Non lasciare spazzi tra le virgole.
             </div>
 
         </div>

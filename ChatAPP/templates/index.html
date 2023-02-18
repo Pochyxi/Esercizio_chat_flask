@@ -19,20 +19,20 @@ La mia Chat App
     <div class="row mt-5">
 
 
-            {% for room in rooms %}
-            <div class="col d-flex justify-content-center my-3">
-                <div class="card bg-dark" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title ">{{ room.room_name }}</h5>
-                        <a class="btn btn-success mt-5" href="/rooms/{{ room._id.room_id }}">Entra</a>
-                    </div>
+        {% for room in rooms %}
+        <div class="col d-flex justify-content-center my-3">
+            <div id="card_room" class="card bg-dark" style="width: 18rem;">
+                <div class="card-body text-center">
+                    <h5 class="card-title bg-dark text-light">{{ room.room_name }}</h5>
+                    <a class="btn btn-light outlined mt-5" href="/rooms/{{ room._id.room_id }}">Entra</a>
                 </div>
             </div>
-            {% endfor %}
+        </div>
+        {% endfor %}
 
 
     </div>
-    <div class="row text-center mt-3">
+    <div class="row text-center text-success mt-3">
         <div class="col">
             <label for="add_room">
                 <i class="bi bi-plus-circle-fill icon_label"></i>

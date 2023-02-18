@@ -3,6 +3,7 @@ from flask_login import LoginManager
 
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -11,7 +12,4 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
-
 from ChatAPP import routes
-
-

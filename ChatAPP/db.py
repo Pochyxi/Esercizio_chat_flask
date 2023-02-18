@@ -6,14 +6,16 @@ import certifi
 from ChatAPP.user import User
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
 print(os.getenv('DB_KEY'))
 
 ca = certifi.where()
 
-client = MongoClient(f"mongodb+srv://test:{os.getenv('DB_KEY')}@chatapp.o7rhppm.mongodb.net/?retryWrites=true&w=majority",
-                     tlsCAFile=ca)
+client = MongoClient(
+    f"mongodb+srv://test:{os.getenv('DB_KEY')}@chatapp.o7rhppm.mongodb.net/?retryWrites=true&w=majority",
+    tlsCAFile=ca)
 
 chat_db = client.get_database("ChatDB")
 users_collection = chat_db.get_collection("users")

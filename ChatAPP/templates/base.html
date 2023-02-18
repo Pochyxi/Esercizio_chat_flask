@@ -16,7 +16,7 @@
 {% if check_auth %}
 <nav class="d-flex">
     <div class="col">
-        <label class="icon_label text-primary" for="go_home">
+        <label class="icon_label text-light" for="go_home">
             <i class="bi bi-house-door-fill"></i>
         </label>
         <form method="post" action="/">
@@ -24,13 +24,13 @@
         </form>
     </div>
     <div class="col text-end text-danger mx-2">
-            <label for="logout">
-                <i class="bi bi-box-arrow-left icon_label"></i>
-            </label>
-            <form class="row justify-content-end d-none" method="post" action="/">
-                <input id="logout" class="btn btn-danger col-2" type="submit" value="logout" name="logout"/>
-            </form>
-        </div>
+        <label for="logout">
+            <i class="bi bi-box-arrow-left icon_label"></i>
+        </label>
+        <form class="row justify-content-end d-none" method="post" action="/">
+            <input id="logout" class="btn btn-danger col-2" type="submit" value="logout" name="logout"/>
+        </form>
+    </div>
 </nav>
 {% endif %}
 

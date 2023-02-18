@@ -7,8 +7,9 @@ Modifica stanza
 {% block content %}
 
 <h1 class="text-center">Modifica stanza</h1>
-<h3 class="{% if message %}{{ 'alert alert-danger w-50 mx-auto my-5' }}{% else %}{{ 'alert alert-danger w-50 m-auto my-5 d-none' }}{% endif %}">{{ message }}</h3>
-<div class="card text-success p-4 w-50 mx-auto my-5">
+<h3 class="{% if message %}{{ 'alert alert-danger w-50 mx-auto my-5' }}{% else %}{{ 'alert alert-danger w-50 m-auto my-5 d-none' }}{% endif %}">
+    {{ message }}</h3>
+<div class="card bg-dark text-light p-4 w-75 mx-auto my-5">
     <form method="post">
         <div class="mb-3">
             <label class="form-label" for="nome_stanza">Nome stanza:</label>
@@ -17,7 +18,9 @@ Modifica stanza
         <div class="mb-3">
             <label class="form-label" for="membri_stanza">Membri:</label>
             <input class="form-control" type="text" id="membri_stanza" name="members" value="{{ room_members_str }}">
-            <div id="emailHelp" class="form-text">Eliminare un nome per rimuovere un membro dalla stanza, aggiungi il nome utente di un membro per aggiungerlo alla lista, si prega di non lasciare spazzi tra le virgole</div>
+            <div id="emailHelp" class="form-text">Eliminare un nome per rimuovere un membro dalla stanza, aggiungi il
+                nome utente di un membro per aggiungerlo alla lista, si prega di non lasciare spazzi tra le virgole
+            </div>
         </div>
 
         <button class="btn btn-success" type="submit">Invia</button>
