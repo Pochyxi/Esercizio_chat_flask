@@ -59,7 +59,7 @@ body {
     color: #ffffff;
     border-radius: 5px;
     padding: 10px;
-    box-shadow: 5px 0 1px gainsboro;
+    box-shadow: 1px 0 2px gainsboro;
 }
 /*la dicitura membri nella stanza*/
 #membri_nella_stanza {
@@ -150,6 +150,16 @@ body {
 }
 .card_delete:hover{
     transform: scale(1.2)!important;
+}
+.targa_admin{
+    font-size: .8rem;
+    position: relative;
+    bottom: 53px;
+    left: 25px;
+    background-color: aliceblue;
+    color: #313131;
+    border-bottom-right-radius: 5px;
+    opacity: .7;
 }
 
 /*FINE PAGINA HOME*/
