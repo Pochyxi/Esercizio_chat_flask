@@ -29,7 +29,7 @@ body {
 /*CONTENITORE PRINCIPALE DI TUTTA L'APP'*/
 .my_container {
     background-color: #313131;
-    min-height: 100vh;
+    height: 100%;
     color: antiquewhite;
     display: flex;
     flex-direction: column;
@@ -63,14 +63,14 @@ body {
 /*La sezione laterale che mostra la lista di membri nella stanza*/
 .members_section {
     display: flex;
-    height: 77vh;
+    height: 75vh;
     overflow: auto;
 }
 /*la sezione che contiene la lista di membri*/
 #membri_nella_stanza_section {
     color: #ffffff;
     padding: 10px;
-    border-right: 1px solid gainsboro;
+    border-right: 1px solid #505050;
 }
 #room_message_length{
     border-radius: 50%;
@@ -84,7 +84,7 @@ body {
 /*la sezione che contiene le box dei messaggi*/
 .message_container {
     width: 70%;
-    height: 77vh;
+    height: 70vh;
     text-align: center;
     overflow: auto;
 }
@@ -127,13 +127,12 @@ body {
 }
 
 .send_message_section {
-    margin-top: 40px;
+    /*margin-top: 40px;*/
 }
 
 #message_input {
-    height: 100px;
+    height: 150px;
     width: 100%;
-    margin-right: 50px;
     font-size: 2rem;
 }
 

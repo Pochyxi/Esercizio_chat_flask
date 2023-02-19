@@ -18,15 +18,13 @@ Stanza
                 <div id="room_message_length" class="bg-dark text-light m-auto">{{ room_messages_length }}</div>
             </div>
             <h4 id="membri_nella_stanza" class="mt-5">Membri nella stanza</h4>
-            {% if check_room_admin %}
             <div>
                 <div class="d-inline btn btn-danger text-danger" style="font-size: 1px">:</div>
                 <div class="d-inline text-light" style="font-size: small">Admin</div>
             </div>
-            {% endif %}
 
             {% for member in room_members %}
-            <div class="{% if member._id.username == current_user.username and check_room_admin %}{{ 'card bg-danger text-light mt-2 text-center' }}{% else %}{{ 'card text-dark mt-2 text-center' }}{% endif %}">
+            <div class="{% if member.is_room_admin %}{{ 'card bg-danger text-light mt-2 text-center' }}{% else %}{{ 'card text-dark mt-2 text-center' }}{% endif %}">
                 {{ member._id.username }}
             </div>
             {% endfor %}
@@ -48,7 +46,7 @@ Stanza
 
 <div class="card d-flex flex-row flex-nowrap justify-content-center bg-dark send_message_section">
 
-    <div class="d-flex col ms-4">
+    <div class="d-flex col-2 ms-4">
         {% if check_room_admin %}
         <form method="post">
             <!--suppress XmlInvalidId -->
@@ -68,7 +66,7 @@ Stanza
             {{ message_form.submit(id='message_send_button') }}
         </form>
     </div>
-    <div class="col ms-4">
+    <div class="col-2 ms-4">
         {% if check_room_admin %}
         <form method="post">
             <label class="icon_label" for="modify">
