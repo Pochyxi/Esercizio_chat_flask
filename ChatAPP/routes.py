@@ -89,6 +89,7 @@ def home():
     rooms = []
     if current_user.is_authenticated():
         rooms = get_rooms_for_user(current_user.username)
+        print(rooms)
 
     if request.method == 'POST':
         if request.form.get('logout') == 'logout':
@@ -97,7 +98,20 @@ def home():
             return redirect(url_for('logout'))
         elif request.form.get('add_room') == 'add_room':
             return redirect(url_for('create_room'))
-
+        elif request.form.get('leave_room'):
+            room_id = request.form.get('leave_room')
+            # l'utente sceglie di uscire dalla room
+            # c'è il metodo remove_room_members che ci permette di eliminare da una stanza un membro
+            # parametri necessari, l'id della room e lo username
+            # controlliamo che l'utente sia effettivamente un membro della stanza
+            flag_member = is_room_member(room_id, current_user.username)
+            print("flag_member ------> ", flag_member)
+            print("room_id ------> ", room_id)
+            member_to_delete = [current_user.username]
+            print(member_to_delete)
+            if flag_member == 1:
+                remove_room_members(room_id, member_to_delete)
+                return redirect(url_for('home'))
     return render_template('index.html', rooms=rooms, check_auth=check_auth())
 
 
@@ -200,7 +214,7 @@ def view_room(room_id):
         elif request.form.get('go_home') == 'home':
             return redirect(url_for('home'))
         elif request.form.get('cupido') == 'cupido':
-            love_message = 'ti voglio bene <3'
+            love_message = 'Ti voglio bene by Adi ♥'
 
     if room and is_room_member(room_id, current_user.username):
         return render_template('view_room.html',

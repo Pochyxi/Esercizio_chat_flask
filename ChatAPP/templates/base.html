@@ -13,9 +13,9 @@
     </title>
 </head>
 <body>
-{% if check_auth %}
-<nav class="d-flex">
-    <div class="col">
+<nav class="d-flex jutify-content-center text-center text-light bg-dark my_nav">
+    {% if check_auth %}
+    <div class="col text-start">
         <label class="icon_label text-light" for="go_home">
             <i class="bi bi-house-door-fill"></i>
         </label>
@@ -23,6 +23,11 @@
             <input id="go_home" class="d-none" type="submit" value="home" name="go_home">
         </form>
     </div>
+    {% endif %}
+    <div class="col">
+        <h2>Chat GROUP</h2>
+    </div>
+    {% if check_auth %}
     <div class="col text-end text-danger mx-2">
         <label for="logout">
             <i class="bi bi-box-arrow-left icon_label"></i>
@@ -31,8 +36,8 @@
             <input id="logout" class="btn btn-danger col-2" type="submit" value="logout" name="logout"/>
         </form>
     </div>
+    {% endif %}
 </nav>
-{% endif %}
 
 <div class="my_container h-100 text-light">
     {% block content %}

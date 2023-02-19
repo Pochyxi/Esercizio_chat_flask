@@ -7,7 +7,7 @@ La mia Chat App
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
+        <div class="col text-end">
             <h3>Ciao {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Guest{% endif %} !</h3>
         </div>
     </div>
@@ -23,8 +23,16 @@ La mia Chat App
         <div class="col d-flex justify-content-center my-3">
             <div id="card_room" class="card bg-dark" style="width: 18rem;">
                 <div class="card-body text-center">
+                    <form method="post" class="text-start">
+                        <label for="{{'leave_room' + room.room_name }}">
+                            <i class="bi bi-box-arrow-left text-danger card_delete"></i>
+                        </label>
+                        <input id="{{'leave_room' + room.room_name }}" class="btn btn-danger d-none" type="submit"
+                               value="{{ room._id.room_id }}" name="leave_room">
+                    </form>
                     <h5 class="card-title bg-dark text-light">{{ room.room_name }}</h5>
                     <a class="btn btn-light outlined mt-5" href="/rooms/{{ room._id.room_id }}">Entra</a>
+
                 </div>
             </div>
         </div>

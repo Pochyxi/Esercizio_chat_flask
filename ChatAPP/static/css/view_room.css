@@ -6,6 +6,15 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+/*NAVBAR*/
+
+.my_nav{
+    /*border: 1px solid red;*/
+    border-bottom: 1px solid black;
+}
+
+/*FINE NAVBAR*/
+
 
 /*CONTENITORE PRINCIPALE DI TUTTA L'APP'*/
 .my_container {
@@ -19,6 +28,7 @@ body {
     overflow: hidden;
 }
 /*PAGINA DELLA CHAT*/
+
 /*La sezione con il nome della stanza*/
 .welcome_section {
     display: flex;
@@ -58,7 +68,7 @@ body {
 /*la sezione che contiene le box dei messaggi*/
 .message_container {
     width: 70%;
-    height: 65vh;
+    height: 77vh;
     text-align: center;
     overflow: auto;
 }
@@ -116,11 +126,15 @@ body {
     display: none;
 }
 
+/*FINE PAGINA CHAT*/
+
+
+/*PAGINA HOME*/
+
 .icon_label {
     cursor: pointer;
-    font-size: 4rem;
+    font-size: 3rem;
 }
-
 #card_room{
     opacity: 0.7;
     background-image: linear-gradient(to bottom, rgba(26, 27, 33, 0.2), rgba(53, 59, 68, 0.2));
@@ -128,3 +142,14 @@ body {
 #card_room:hover{
     opacity: 1.5;
 }
+.card_delete{
+    position: relative;
+    bottom: 25px;
+    right: 25px;
+    cursor: pointer;
+}
+.card_delete:hover{
+    transform: scale(1.2)!important;
+}
+
+/*FINE PAGINA HOME*/
