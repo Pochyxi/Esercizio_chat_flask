@@ -3,15 +3,16 @@
 Stanza
 {% endblock %}
 {% block content %}
-<div class="welcome_section">
-    <h1 id="room_name"><span class="nome_stanza">{{ room.name }}</span></h1>
-</div>
-<div class="number_of_messages">
-    Messaggi totali : {{ room_messages_length }}
-</div>
+
 <div class="messages_section">
     <div class="members_section">
         <div id="membri_nella_stanza_section">
+            <div class="welcome_section">
+                <h1 id="room_name"><span class="nome_stanza">{{ room.name }}</span></h1>
+            </div>
+            <div class="number_of_messages text-start">
+                <h4>Messaggi totali : {{ room_messages_length }}</h4>
+            </div>
             <h4 id="membri_nella_stanza">Membri nella stanza</h4>
             {% for member in room_members %}
             <li>{{ member._id.username }}</li>
@@ -33,8 +34,8 @@ Stanza
 </div>
 
 <div class="card d-flex flex-row flex-nowrap justify-content-center bg-dark send_message_section">
-    <div>{{love_message}}</div>
-    <div class="col ms-4">
+
+    <div class="d-flex col ms-4">
         {% if check_room_admin %}
         <form method="post">
             <!--suppress XmlInvalidId -->
@@ -45,6 +46,14 @@ Stanza
             {{ cupido_form.submit(class='btn btn-outline-success d-none') }}
         </form>
         {% endif %}
+        <div class="text-danger">{{love_message}}</div>
+    </div>
+
+    <div class="col">
+        <form method="post" id="form_invio_messaggio">
+            {{ message_form.message(id='message_input', placeholder='Premi invio') }}
+            {{ message_form.submit(id='message_send_button') }}
+        </form>
     </div>
     <div class="col ms-4">
         {% if check_room_admin %}
@@ -58,11 +67,6 @@ Stanza
         </form>
         {% endif %}
     </div>
-    <div class="col">
-        <form method="post" id="form_invio_messaggio">
-            {{ message_form.message(id='message_input', placeholder='Premi invio') }}
-            {{ message_form.submit(id='message_send_button') }}
-        </form>
-    </div>
+
 </div>
 {% endblock %}

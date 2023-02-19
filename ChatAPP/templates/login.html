@@ -7,9 +7,13 @@ Pagina di Login
 {% block content %}
 
 <h1 class="text-center">Pagina di Login</h1>
-<h3 class="{% if message %}{{ 'alert alert-danger w-50 mx-auto my-5' }}{% else %}{{ 'alert alert-danger w-50 m-auto my-5 d-none' }}{% endif %}">
+<h3 class="{% if message %}
+                {{ 'alert alert-danger w-50 mx-auto my-5' }}
+            {% else %}
+                {{ 'alert alert-danger w-50 m-auto my-5 d-none' }}
+            {% endif %}">
     {{ message }}</h3>
-<div class="card bg-dark text-light p-4 w-75 mx-auto my-5">
+<div class="card bg-dark text-light p-4 col-sm-10 col-md-8 col-lg-6 col-xl-4 mx-auto my-5">
     <form action="/login" method="post">
         <div class="mb-3">
             <label for="login_username" class="form-label">Nome utente:</label>
