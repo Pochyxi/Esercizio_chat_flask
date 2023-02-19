@@ -10,12 +10,25 @@ Stanza
             <div class="welcome_section">
                 <h1 id="room_name"><span class="nome_stanza">{{ room.name }}</span></h1>
             </div>
-            <div class="number_of_messages text-start">
-                <h4>Messaggi totali : {{ room_messages_length }}</h4>
+            <div class="mt-3 justify-content-center p-2 card number_of_messages text-center text-dark">
+                <div class="col">
+                    <h4>Messaggi totali</h4>
+                </div>
+
+                <div id="room_message_length" class="bg-dark text-light m-auto">{{ room_messages_length }}</div>
             </div>
-            <h4 id="membri_nella_stanza">Membri nella stanza</h4>
+            <h4 id="membri_nella_stanza" class="mt-5">Membri nella stanza</h4>
+            {% if check_room_admin %}
+            <div>
+                <div class="d-inline btn btn-danger text-danger" style="font-size: 1px">:</div>
+                <div class="d-inline text-light" style="font-size: small">Admin</div>
+            </div>
+            {% endif %}
+
             {% for member in room_members %}
-            <li>{{ member._id.username }}</li>
+            <div class="{% if member._id.username == current_user.username and check_room_admin %}{{ 'card bg-danger text-light mt-2 text-center' }}{% else %}{{ 'card text-dark mt-2 text-center' }}{% endif %}">
+                {{ member._id.username }}
+            </div>
             {% endfor %}
         </div>
     </div>

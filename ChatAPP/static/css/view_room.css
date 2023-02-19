@@ -12,6 +12,16 @@ body {
     /*border: 1px solid red;*/
     border-bottom: 1px solid black;
 }
+.logo{
+    height: 80px;
+    width: 80px;
+}
+.logo_chat{
+    color: #f07613;
+}
+.logo_group{
+    color: azure;
+}
 
 /*FINE NAVBAR*/
 
@@ -52,18 +62,24 @@ body {
 }
 /*La sezione laterale che mostra la lista di membri nella stanza*/
 .members_section {
-    /*display: flex;*/
+    display: flex;
+    height: 77vh;
+    overflow: auto;
 }
 /*la sezione che contiene la lista di membri*/
 #membri_nella_stanza_section {
     color: #ffffff;
-    border-radius: 5px;
     padding: 10px;
-    box-shadow: 1px 0 2px gainsboro;
+    border-right: 1px solid gainsboro;
+}
+#room_message_length{
+    border-radius: 50%;
+    height: 5vh;
+    width: 5vh;
 }
 /*la dicitura membri nella stanza*/
 #membri_nella_stanza {
-    margin-top: 0;
+    margin-top: 5px;
 }
 /*la sezione che contiene le box dei messaggi*/
 .message_container {
@@ -92,7 +108,7 @@ body {
     border: 2px solid black;
     box-shadow: 0 4px 8px 0 rgba(227, 221, 221, 0.2);
     transition: 0.3s;
-    background-color: azure;
+    background-color: whitesmoke;
     color: black;
     border-radius: 5px;
     width: 50%;
