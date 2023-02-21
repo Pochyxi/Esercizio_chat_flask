@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #313131;
+    font-size: 1.5rem;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/*CONTENITORE PRINCIPALE DI TUTTA L'APP'*/
+.my_container {
+    background-color: #313131;
+    height: 100%;
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: start;
+    overflow: hidden;
+}

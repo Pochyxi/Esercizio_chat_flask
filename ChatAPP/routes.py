@@ -1,7 +1,10 @@
 # ### MODULI ### #
+import json
+
 from flask_login import current_user, login_user, login_required, logout_user
 from flask import redirect, url_for, render_template, request
 from pymongo.errors import DuplicateKeyError
+from bson import ObjectId
 
 # ###  IMPORTS PACKAGE ### #
 from ChatAPP import app, login_manager
@@ -228,9 +231,22 @@ def view_room(room_id):
                                check_room_admin=check_room_admin,
                                check_auth=check_auth(),
                                cupido_form=cupido_form,
-                               love_message=love_message)
+                               love_message=love_message,
+                               room_id=room_id)
     else:
         return "Stanza non trovata", 404
+
+
+@app.route('/messages/total/<room_id>/', methods=['GET', 'POST'])
+def get_messages(room_id):
+    messages_len = len(get_message_by_room_id(room_id))
+    print(room_id)
+    print()
+    # return get_message_by_room_id(room_id)
+    return [messages_len]
+    # if request.method == 'GET':
+    #     print(room_id)
+    #     return get_message_by_room_id(room_id)
 
 
 @login_manager.user_loader

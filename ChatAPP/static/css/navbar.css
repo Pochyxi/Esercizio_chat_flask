@@ -1,0 +1,17 @@
+/*NAVBAR*/
+.my_nav{
+    /*border: 1px solid red;*/
+    border-bottom: 1px solid black;
+}
+.logo{
+    height: 80px;
+    width: 80px;
+}
+.logo_chat{
+    color: #f07613;
+}
+.logo_group{
+    color: azure;
+}
+
+/*FINE NAVBAR*/
